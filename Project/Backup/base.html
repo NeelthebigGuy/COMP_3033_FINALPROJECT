@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>Base Page of Project</title>
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        <script src="project.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
+    </head>
+
+    <body>
+        <div class="container-fluid text-white bg-dark">
+            <h1>League Helper</h1>
+            <h2>Please enter your summoner name</h2>
+            <input type="text" class="form-control" style="width:30%" id="summoner"/>
+            <button type="button" class="btn btn-light" onClick="goclick()" id="getsummoner_btn">Search</button>
+            <div id="data_container"></div>
+        </div>
+    </body>
+</html>
