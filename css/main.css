@@ -1,0 +1,34 @@
+.center{
+    margin: auto;
+    width: 50%;
+}
+
+.mycontainer{
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    border: 1px black solid;
+    width: fit-content;
+    padding: 10px 0;
+}
+
+.myitems{
+    background-color: red;
+    width: fit-content;
+    display: flex;
+    justify-content: space-evenly;
+    min-width: 10px;
+    border: 1px black solid;
+
+}
+
+.item{
+    min-width: 200px;
+    border: 1px black solid;
+    text-align: center;
+}
+
+.myform{
+    display: flex;
+    gap: 5px;
+}
