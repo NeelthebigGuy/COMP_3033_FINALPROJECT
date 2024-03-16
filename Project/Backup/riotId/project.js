@@ -1,19 +1,16 @@
 //API key for RIOT, modify when expired
-let api_key = "RGAPI-9dd76956-459b-46bf-bb43-13eda145d67f";
-
-//example of image pull
-//<img src="https://ddragon.leagueoflegends.com/cdn/14.5.1/img/item/2504.png">
+let api_key = "RGAPI-c87f1658-3b9d-40ae-969e-52bd11291f43";
 
 //Function to pull puuid from summoner name
-async function getSummonerInfo(summonerName) {
+async function getSummonerInfo(summonerName, tagline) {
   try {
     //replace spaces for DOM manipulation
     const truesummoner = summonerName.replace(" ", "%20");
-    let htmlString = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/";
-        htmlString += truesummoner + "?api_key=" + api_key;
+    let htmlString = "https://americas.api.riotgames.com/riot/account/v1/accounts/by-riot-id/";
+        htmlString += truesummoner + "/" + tagline + "?api_key=" + api_key;
     //Await fetch from API
     const response = await fetch(htmlString);
-0
+
     //Response to bad connection, with status response
     if (!response.ok) {
       let errorString = "Error getting summoner info. Status Code: " + response.status;
@@ -35,7 +32,7 @@ async function getSummonerInfo(summonerName) {
 async function getMatchList(puuid) {
   try {
     let htmlString = "https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/";
-        htmlString += puuid + "/ids?start=0&count=10&api_key=" + api_key;
+        htmlString += puuid + "/ids?api_key=" + api_key;
     //Await fetch from API
     const match_ids = await fetch(htmlString);
 
@@ -86,13 +83,14 @@ async function getMatchHistory() {
   try {
     //Define summoner name from value entered by user
     const summonerName = $("#summoner").val();
+    const tagline = $("#tag").val();
     //Get puuid from summoner name
-    const summonerInfo = await getSummonerInfo(summonerName);
+    const summonerInfo = await getSummonerInfo(summonerName, tagline);
 
     //Error handling for null entry
     if (summonerInfo === null) {
       let htmlString = "<p>Account not found</p>";
-      $("#response_container").html(htmlString);
+      $("#data_container").html(htmlString);
       return null;
     }
 
@@ -110,7 +108,7 @@ async function getMatchHistory() {
     //Response for no matches found on account
     if (matchIds.length === 0) {
       let htmlString = "<p>No matches tracked on account</p>";
-      $("#response_container").html(htmlString);
+      $("#data_container").html(htmlString);
     }
     else {
       //Define indivdual matches from individual requests
@@ -120,7 +118,7 @@ async function getMatchHistory() {
       const matches = await Promise.all(matchDetailsPromises);
 
       // Display the match data in the HTML
-      let htmlString = "<table><tr><td>KDA</td><td>Champion</td><td>Win/Loss</td></tr>";
+      let htmlString = "<ul>";
 
       //Define variables for total stats and winrates
       let totalkills = 0;
@@ -140,22 +138,18 @@ async function getMatchHistory() {
         totalassists += participant.assists;
         //Define champion name
         const championId = participant.championName;
-        //Convert "'" to "%27" for DOM request
-        let championImageID = championId.replace("'", "%27");
         //API request for champion image
-        const championImage = `<img src="https://ddragon.leagueoflegends.com/cdn/14.5.1/img/champion/${championImageID}.png" alt="${championId}" />`;
-        htmlString += "<tr><th>"+kda+"</th>";
+        const championImage = `<img src="https://ddragon.leagueoflegends.com/cdn/12.2.1/img/champion/${championId}.png" alt="${championId}" />`;
+        htmlString += "<li>KDA: " + kda +", Champion: "+ championId;
         //Victory/Defeat message and tracking
         if(participant.win == true) {
           winrate++;
-          htmlString += "<th>" + championImage + "</th><th>Victory!</th>";
+          htmlString += " Victory!" + championImage + "</li>";
         }
         else {
-          htmlString += "<th>" + championImage + "</th><th>Defeat</th>";
+          htmlString += " Defeat" + championImage + "</li>";
         }
-        htmlString += "</tr>"
       });
-      htmlString += "</table>"
       //round numbers to 1 decimal place
       totalkills = Math.round((totalkills / 20) * 10) / 10;
       totaldeaths = Math.round((totaldeaths / 20) * 10) / 10;
@@ -164,12 +158,10 @@ async function getMatchHistory() {
       //Display average KDA and Winrate in percentage form
       let avrKDA = (totalkills)+"/"+(totaldeaths)+"/"+(totalassists);
       winrate = (winrate / 20) * 100;
-      let htmlString2 = "<p>Average KDA = "+avrKDA+" winrate = " + winrate + "%</p><br>";
+      htmlString += "</ul><br><p>Average KDA = "+avrKDA+" winrate = " + winrate + "%</p>";
 
-      //Display as hmtl string within data container and clear response container
-      $("#response_container").html("");
-      $("#statistics_container").html(htmlString2);
-      $("#winloss_container").html(htmlString);
+      //Display as hmtl string within data container
+      $("#data_container").html(htmlString);
     }
 
   //Error catching protocol
@@ -182,13 +174,11 @@ async function getMatchHistory() {
 //goClick function for hmtl functionality
 async function goclick() {
   // Clear previous search results on button press
-  $("#response_container").html("");
-  $("#winloss_container").html("");
-  $("#statistics_container").html("");
+  $("#data_container").html("");
   console.log("The Go button was clicked!");
 
   // Display a loading indicator
-  $("#response_container").html("<p>Loading...</p>");
+  $("#data_container").html("<p>Loading...</p>");
 
   //Initiate main function
   try {
@@ -197,6 +187,6 @@ async function goclick() {
   //Error catching protocol
   catch (error) {
     console.error("An error occurred:", error);
-    $("#response_container").html("<p>Error retrieving match history</p>");
+    $("#data_container").html("<p>Error retrieving match history</p>");
   }
 }
