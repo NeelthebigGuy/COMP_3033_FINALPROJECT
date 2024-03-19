@@ -190,7 +190,7 @@
              $supps = mysqli_query($con, "SELECT DISTINCT Champ FROM ChampionList WHERE Pref_role='Support';");
                 
              echo '<select name="SuppSelect">';
-             echo '<option value="DEFAULT">no selection</option>';   
+             echo '<option value="DEFAULT">Support</option>';   
              while($supp = mysqli_fetch_array($supps)){
                  echo '<option value="' . $supp['Champ'] . '">' . $supp['Champ'] . '</option>';   
              }
@@ -202,7 +202,7 @@
              $bots = mysqli_query($con, "SELECT DISTINCT Champ FROM ChampionList WHERE Pref_role='Bottom';");
 
              echo '<select name="BotSelect">';
-             echo '<option value="DEFAULT">no selection</option>';   
+             echo '<option value="DEFAULT">Bottom</option>';   
              while($bot = mysqli_fetch_array($bots)){
                  echo '<option value="' . $bot['Champ'] . '">' . $bot['Champ'] . '</option>';   
              }
@@ -302,6 +302,52 @@
         <div>
 
 
+
+
+        <!-- GETTING INFO FOR ITEM BUILDS BY SEARCH -->
+        
+        <div class="center">
+
+            <div class="navbar">
+                <form method="POST" class="outerform">
+                <h2>Item Builds by Champion</h2>
+                    <div class="innderform">
+                        Find Champion by name
+                        <input type="text" name="champBuild">
+                    </div>
+                </form>
+
+                <?php
+        
+                    if(isset($_POST["champBuild"])){
+                        $tempBuild = $_POST["champBuild"];
+                        if($tempBuild != ""){    
+                            echo $tempBuild;
+                        }
+                    }else {$buildresults = '';}
+        
+                 ?>
+
+
+            </div>
+
+        </div>
+
+        <div class="center">
+
+            <?php
+
+                echo '<div class="myitems">';
+
+                    echo '<div class="item">';
+                    echo $tempBuild;
+                    echo '</div>';
+                    
+                echo '</div>';
+
+            ?>
+
+        </div>
         
     </body>
 
