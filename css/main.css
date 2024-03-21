@@ -8,6 +8,15 @@
     font-style: normal;
 }
 
+a{
+    text-decoration: none;
+}
+
+.homebutton{
+    color: grey;
+    margin: 10px;
+}
+
 .navbar{
     display: flex;
     justify-content: center;
