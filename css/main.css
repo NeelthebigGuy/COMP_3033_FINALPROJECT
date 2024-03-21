@@ -8,6 +8,15 @@
     font-style: normal;
 }
 
+.champtitle{
+    padding: 20px;
+    background-color: #495FC3;
+    color: black;
+    margin-bottom: 20px;
+    font-size: 40px;
+    border-radius: 20px;
+}
+
 a{
     text-decoration: none;
 }
@@ -112,4 +121,5 @@ select{
     padding: 10px;
     display: flex;
     gap: 5px;
+    min-height: 100px;
 }

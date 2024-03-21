@@ -8,25 +8,29 @@
     }
     
     $sql_statement = "SELECT Champ, Pref_role, Job, AP_AD FROM ChampionList";
+    $result = '';
 
     if(isset($_POST["champName"])){
         $tempName = $_POST["champName"];
-        if($tempName != ""){    
+        if($tempName != "default"){    
+
+            // FIND BASIC DATA
             $sql_statement = $sql_statement . " WHERE Champ='$tempName'";
             $result = mysqli_query($con, $sql_statement);
-        }
-    }else {$result = '';}
 
-    if(isset($_POST["attSelect"])){
-        $tempSelect = $_POST["attSelect"];
+            //FIND ITEM BUILD DATA
+            $itemsql = 'SELECT First_Item, Second_Item, Third_Item FROM ChampionBuild';
+            $buildResult = '';
+        }
     }
+
 
 ?>
 
 <html>
     <head>
         <title> Champion Data </title>
-        <link rel="stylesheet" href="main.css">
+        <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="home.css">
     </head>
     <body>
@@ -37,76 +41,22 @@
             <form method="POST" class="outerform">
             <h2>League of Legends Database</h2>
                 <div class="innderform">
-                    Find Champion by name
-                    <input type="text" name="champName">
-                </div>
-
-                <div class="innderform">
-                    List Chamption by 
-                    <select name="attSelect">
-                        <option value=""> Hide Champions </option>
-                        <option value="Pref_role">Role</option>
-                        <option value="Job">Job</option>
+                    Pick Champion:
+                    <select name="champName" onmousedown="if(this.options.length>6){this.size=10;} style='height: 150px; width: 200px'"  onchange='this.size=0; style="position: relative;"' onblur="this.size=0; style='position: relative;'">
+                        <option value="default"> Champions </option>
+                        <?php
+                         $champs = mysqli_query($con, "SELECT DISTINCT Champ FROM ChampionList;");
+                
+                         while($champ = mysqli_fetch_array($champs)){
+                             echo '<option value="' . $champ['Champ'] . '">' . $champ['Champ'] . '</option>';   
+                         }
+                         mysqli_free_result($champs);
+                        ?>
                     </select>
                     <input type="submit">
-                
-                    <?php 
-                    
-                    if(isset($_POST["attSelect"])){
-                        $tempSelect = $_POST["attSelect"];
-
-                        //JOB LIST SELECTION
-                        if($tempSelect == "Job"){
-                            echo '<select name="jobSelect">';
-
-                            $jobs = mysqli_query($con, "SELECT DISTINCT Job FROM ChampionList;");
-                            
-                            while($job = mysqli_fetch_array($jobs)){
-                                echo '<option value="' . $job['Job'] . '">' . $job['Job'] . '</option>';   
-                            }
-
-                            echo '</select>';
-                            echo '<input type="submit">';
-                            mysqli_free_result($jobs);
-
-                        }
-                        
-                        //LANE LIST SELECTION
-                        if($tempSelect == "Pref_role"){
-                            echo '<select name="laneSelect">';
-
-                            $lanes = mysqli_query($con, "SELECT DISTINCT Pref_role FROM ChampionList;");
-                            
-                            while($lane = mysqli_fetch_array($lanes)){
-                                echo '<option value="' . $lane['Pref_role'] . '">' . $lane['Pref_role'] . '</option>';   
-                            }
-
-                            echo '</select>';
-                            echo '<input type="submit">';
-                            mysqli_free_result($lanes);
-
-                        }
-                    }
-
-                    //JOB SELECT SUBMIT 
-                    if(isset($_POST["jobSelect"])){
-                        $tempJob = $_POST["jobSelect"];
-                        $sql_statement = $sql_statement . " WHERE Job='" . $tempJob . "'";
-                        $result = mysqli_query($con, $sql_statement);
-                    }
-
-
-                    //LANE SELECT
-                    if(isset($_POST["laneSelect"])){
-                        $tempLane= $_POST["laneSelect"];
-                        $sql_statement = $sql_statement . " WHERE Pref_role='" . $tempLane . "'";
-                        $result = mysqli_query($con, $sql_statement);
-                    }
-
-                    ?>
-                
                 </div>
-            </div>
+
+                
             </form>
         </div>
 
@@ -121,8 +71,14 @@
                     <?php
 
                     if($result != ''){
+
+                    echo '<div class="champtitle">
+                        
+                        ' . $tempName . '
+                        
+                        </div>';
+
                     echo '<div class="myitems">
-                    <div class="item"><h2> Champion Name </h2></div>
                     <div class="item"><h2> Main Role </h2></div>
                     <div class="item"><h2> Job </h2></div>
                     <div class="itemNB"><h2> AP or AD </h2></div>
@@ -131,10 +87,6 @@
 
                     while($row = mysqli_fetch_array($result)){
                     echo '<div class="myitems">';
-
-                    echo '<div class="item">';
-                    echo $row['Champ'];
-                    echo '</div>';
 
                     echo '<div class="item">';
                     echo $row['Pref_role'];

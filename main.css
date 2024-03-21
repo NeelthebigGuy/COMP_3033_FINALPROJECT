@@ -24,6 +24,7 @@ a{
     justify-content: center;
     width: min-content;
     padding-bottom: 5px;
+    height: 1000px;
 }
 
 .centerPB{
@@ -105,6 +106,7 @@ select{
     flex-direction: column;
     margin: 20px;
     padding: 4px;
+    min-height: 100px;
 }
 
 .innderform{
