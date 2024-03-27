@@ -1,0 +1,52 @@
+/* PALLET USED https://coolors.co/palette/2f6690-3a7ca5-d9dcd6-16425b-81c3d7 
+
+
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Gabriela&display=swap');
+
+
+.homestyle{
+    font-family: "Gabriela", serif;
+    font-weight: 400;
+    font-style: normal;
+      
+}
+
+.hometitle{
+    color: black;
+    background-color: #D9DCD6;
+    padding: 20px 30px;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    border-radius: 10px;
+}
+
+.titlebox{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+    gap: 10px;
+}
+
+.link{
+    display: flex;
+    font-size: 20px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    min-height: 80px;
+    align-self: center;
+    padding: 10px;
+    border: 1px solid #16425B;
+    border-radius: 10px;
+    text-decoration: none;
+    color: inherit;
+    gap: 10px;
+}
+
+.link:hover{
+    background-color: white;
+}

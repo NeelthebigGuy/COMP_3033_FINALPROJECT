@@ -1,0 +1,73 @@
+<?php
+    // Assuming $con is your database connection
+
+    if (isset($_POST["AddOrDel"])) {
+        $tempOption = $_POST["AddOrDel"];
+
+        // HANDLE ADD SELECT
+        if ($tempOption == "Add") {
+
+             //CREATE SUPP SELECTION
+             $supps = mysqli_query($con, "SELECT DISTINCT Champ FROM ChampionList WHERE Pref_role='Support';");
+                
+             echo '<select name="SuppSelect">';
+             while($supp = mysqli_fetch_array($supps)){
+                 echo '<option value="' . $supp['Champ'] . '">' . $supp['Champ'] . '</option>';   
+             }
+             echo '</select>';
+             mysqli_free_result($supps);
+
+
+             //CREATE BOT SELECTION
+             $bots = mysqli_query($con, "SELECT DISTINCT Champ FROM ChampionList WHERE Pref_role='Bottom';");
+
+             echo '<select name="BotSelect">';
+             while($bot = mysqli_fetch_array($bots)){
+                 echo '<option value="' . $bot['Champ'] . '">' . $bot['Champ'] . '</option>';   
+             }
+             echo '</select>';
+             echo '<input type="submit">';
+             mysqli_free_result($bots);
+        }
+
+        // HANDLE DELETE SELECT
+        if ($tempOption == "Delete") {
+
+              //CREATE DELETE SELECTION
+              $listcombos = mysqli_query($con , "SELECT * FROM SupportBottomPairing;");
+
+              echo '<select name="ComboSelect">';
+              while($listcombo = mysqli_fetch_array($listcombos)){
+                  echo '<option value="' . $listcombo['id'] . '">' . $listcombo['Support'] . ' , ' . $listcombo['Bottom'] . '</option>';    
+              }
+              echo '</select>';
+              echo '<input type="submit">';
+              mysqli_free_result($listcombos);
+
+        }
+    }
+
+    // HANDLE ADD COMBO
+    if (isset($_POST["BotSelect"])) {
+        $tempSupp = $_POST["SuppSelect"];
+        $tempBot = $_POST["BotSelect"];
+
+        $toInsert = "INSERT INTO SupportBottomPairing (Support, Bottom) VALUES ('$tempSupp', '$tempBot')"; 
+        if (!mysqli_query($con, $toInsert)) {
+            echo "Error: " . mysqli_error($con);
+        }
+    }
+
+    // HANDLE DELETE COMBO
+    if (isset($_POST["ComboSelect"])) {
+        $tempId = $_POST["ComboSelect"];
+
+        $toDelete = "DELETE FROM SupportBottomPairing WHERE id='$tempId'";
+        echo "TEST";
+        if (!mysqli_query($con, $toDelete)) {
+            echo "Error: " . mysqli_error($con);
+        }
+    }
+?>
+
+<!-- Your HTML form goes here -->

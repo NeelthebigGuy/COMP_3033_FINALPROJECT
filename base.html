@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>Base Page of Project</title>
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        <script src="project.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
+    </head>
+
+    <body class="text-black bg-light">
+        <div class="container-fluid px-4">
+            <h1>League Helper</h1>
+            <h2>Please enter your summoner name</h2>
+            <div class="row">
+                <input type="text" class="form-control" style="width:30%" id="summoner"/>
+                <button type="button" class="btn btn-light btn-outline-secondary" onClick="goclick()" id="getsummoner_btn">Search</button>
+            </div>
+            <br>
+            <div id="response_container" class="row"></div>
+            <br>
+            <div id="statistics_container" class="row"></div>
+            <div id="winloss_container" class="table-secondary table-striped table-bordered" style="width: 14%"></div>
+        </div>
+    </body>
+</html>
