@@ -1,5 +1,5 @@
 //API key for RIOT, modify when expired
-let api_key = "RGAPI-9dd76956-459b-46bf-bb43-13eda145d67f";
+let api_key = "RGAPI-92c46f91-7966-4014-badc-14dbe7d49baa";
 
 //example of image pull
 //<img src="https://ddragon.leagueoflegends.com/cdn/14.5.1/img/item/2504.png">
@@ -120,7 +120,7 @@ async function getMatchHistory() {
       const matches = await Promise.all(matchDetailsPromises);
 
       // Display the match data in the HTML
-      let htmlString = "<table><tr><td>KDA</td><td>Champion</td><td>Win/Loss</td></tr>";
+      let htmlString = '<table class="table-bordered" style="border-width:4px"><tr><th>KDA</th><th>Champion</th><th>Win/Loss</th></tr>';
 
       //Define variables for total stats and winrates
       let totalkills = 0;
@@ -164,7 +164,7 @@ async function getMatchHistory() {
       //Display average KDA and Winrate in percentage form
       let avrKDA = (totalkills)+"/"+(totaldeaths)+"/"+(totalassists);
       winrate = (winrate / 20) * 100;
-      let htmlString2 = "<p>Average KDA = "+avrKDA+" winrate = " + winrate + "%</p><br>";
+      let htmlString2 = "<h4>Average KDA = "+avrKDA+"&emsp;Winrate = " + winrate + "%</h4><br>";
 
       //Display as hmtl string within data container and clear response container
       $("#response_container").html("");

@@ -5,22 +5,25 @@
         <title>Base Page of Project</title>
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
         <script src="project.js"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     </head>
 
     <body class="text-black bg-light">
-        <div class="container-fluid px-4">
-            <h1>League Helper</h1>
+        <div class="container-fluid" style="padding: 25px">
+            <p><a href="index.php" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover fixed-bottom" style="margin: 15px">Home</a></p>
+            <h1>Account Look-up</h1>
             <h2>Please enter your summoner name</h2>
-            <div class="row">
-                <input type="text" class="form-control" style="width:30%" id="summoner"/>
-                <button type="button" class="btn btn-light btn-outline-secondary" onClick="goclick()" id="getsummoner_btn">Search</button>
+            <br>
+            <div class="row" style="margin: auto">
+                <input type="text" class="form-control col-5" style="width:30%" id="summoner"/>
+                <button type="button" class="btn btn-light btn-outline-secondary col-1" onClick="goclick()" id="getsummoner_btn">Search</button>
             </div>
             <br>
-            <div id="response_container" class="row"></div>
+            <div id="response_container" class="row col-3"></div>
             <br>
-            <div id="statistics_container" class="row"></div>
-            <div id="winloss_container" class="table-secondary table-striped table-bordered" style="width: 14%"></div>
+            <div id="statistics_container" class="row col-5"></div>
+            <br>
+            <div id="winloss_container" style="padding-left: 50px"></div>
         </div>
     </body>
 </html>
