@@ -15,7 +15,9 @@
 
 .hometitle{
     color: black;
-    background-color: #D9DCD6;
+    background-color: #f8f9fa;
+    border: 1px solid #020405;
+    border-radius: 10px;
     padding: 20px 30px;
     margin-top: 10%;
     margin-bottom: 10%;
@@ -40,7 +42,7 @@
     min-height: 80px;
     align-self: center;
     padding: 10px;
-    border: 1px solid #16425B;
+    border: 1px solid #020405;
     border-radius: 10px;
     text-decoration: none;
     color: inherit;

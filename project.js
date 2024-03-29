@@ -120,7 +120,7 @@ async function getMatchHistory() {
       const matches = await Promise.all(matchDetailsPromises);
 
       // Display the match data in the HTML
-      let htmlString = '<table class="table-bordered" style="border-width:4px"><tr><th>KDA</th><th>Champion</th><th>Win/Loss</th></tr>';
+      let htmlString = '<table class="table-bordered"><tr><th>KDA</th><th>Champion</th><th>Win/Loss</th></tr>';
 
       //Define variables for total stats and winrates
       let totalkills = 0;
