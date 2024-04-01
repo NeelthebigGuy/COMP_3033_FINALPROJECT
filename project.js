@@ -1,8 +1,5 @@
 //API key for RIOT, modify when expired
-let api_key = "RGAPI-92c46f91-7966-4014-badc-14dbe7d49baa";
-
-//example of image pull
-//<img src="https://ddragon.leagueoflegends.com/cdn/14.5.1/img/item/2504.png">
+let api_key = "RGAPI-4760e2cc-b198-4c57-9d17-9a8d702239b1";
 
 //Function to pull puuid from summoner name
 async function getSummonerInfo(summonerName) {
