@@ -14,7 +14,7 @@
                 <div class="titlebox">
                     <a class="link" href="champdata.php">See Champion Data</a>
                     <a class="link" href="supportbot.php">See Support/Bot Combos</a>
-                    <a class="link" href="championbuilds.php">See Champion Builds</a>
+                    <a class="link" href="base.html">See Player Data</a>
                 </div>
             </div>
         </div>
