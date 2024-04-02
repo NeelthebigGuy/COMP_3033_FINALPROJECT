@@ -1,5 +1,5 @@
 //API key for RIOT, modify when expired
-let api_key = "RGAPI-4760e2cc-b198-4c57-9d17-9a8d702239b1";
+let api_key = "RGAPI-48b7e310-2bcc-4778-b368-cea6eab4070f";
 
 //Function to pull puuid from summoner name
 async function getSummonerInfo(summonerName) {

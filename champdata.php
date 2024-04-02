@@ -35,7 +35,7 @@
 <html>
     <head>
         <title> Champion Data </title>
-        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="main.css">
         <link rel="stylesheet" href="home.css">
     </head>
     <body>
